@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block title %} {{ title }} Page {% endblock %}
+
+{% block content %}
+    <form action="#" method="get" onsubmit="spell_function()">
+        <p>
+            Query:
+        </p>
+        <p>
+            <label>
+                <input type="text" name="query" value="{{ query }}" id="query_string"
+                       style="width: 90%;"
+
+
+                        {#oninput="get_suggestions()"#}/>
+            </label>
+
+        </p>
+        <div id="correct_spell" onclick="change_query()">{{ corret_spell }}</div>
+
+
+        <p>
+            <input type="submit" value="submit"/>
+        </p>
+
+    </form>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        function spell_function() {
+            document.getElementById("correct_spell").innerHTML =
+            {{ corret_spell }}
+        }
+
+        function change_query() {
+            document.getElementById("query_string").value = document.getElementById("correct_spell").innerHTML
+        }
+
+        {#function get_suggestions(){#}
+        {##}
+        {#{#}
+
+        function clear_ul() {
+            document.getElementById("suggestion_ul").innerHTML = ""
+        }
+    </script>
+{% endblock %}
+
+
+{% block result %}
+
+    <div>
+
+        {#        <ul style="list-style: none" id="suggestion_ul">#}
+        {#            {% for  suggest in suggestions %}#}
+        {#                <li onclick="clear_ul()">suggest: {{ suggest }}</li>#}
+        {#                <hr>#}
+        {#            {% endfor %}#}
+        {##}
+        {#        </ul>#}
+
+
+        <ul style="list-style: none">
+            {% for  document in results %}
+                result number = {{ loop.index }}
+
+                <li> {{ document.id }}</li>
+                <li> {{ document.title }}</li>
+                <hr>
+            {% endfor %}
+        </ul>
+
+    </div>
+{% endblock %}
+
+
+
+{##}
+{#{% block newcontent %}#}
+{#    <form action="#" method="get">#}
+{#        <p>Query:</p>#}
+{#        <p>#}
+{#            <label>#}
+{#                <!-- <input type="text" name="query" /> -->#}
+{#                <input id="query" type="text" list="options" name="query"/>#}
+{#                <datalist id="options">#}
+{#                    <option>Volvo</option>#}
+{#                    <option>Saab</option>#}
+{#                    <option>Mercedes</option>#}
+{#                    <option>Audi</option>#}
+{#                </datalist>#}
+{#            </label>#}
+{#        </p>#}
+{#        <p>#}
+{#            <input type="submit" value="submit"/>#}
+{#        </p>#}
+{#    </form>#}
+{#{% endblock %}#}
+{##}
+{##}
+{#{% block scripts %}#}
+{#    <script>#}
+{#        $('#query').on('input', function (e) {#}
+{#            console.log($(this).val());#}
+{#            const _this = $(this);#}
+{#            if (!$(this).val()) {#}
+{#                return false;#}
+{#            } else {#}
+{#                $.ajax({#}
+{#                    url: "/suggestions", // change this route into route for json response#}
+{#                    method: "GET",#}
+{#                    data: $(this).serialize(),#}
+{#                    success: function (data) {#}
+{#                        console.log(typeof data.options);#}
+{#                        html = data.options.map(element => {#}
+{#                            console.log("MAP");#}
+{#                            return '<option value="${element}">${element}</option>';#}
+{#                        });#}
+{#                        $('#options').html(html);#}
+{#                        _this.focus();#}
+{#                    }#}
+{#                });#}
+{#            }#}
+{#        })#}
+{#    </script>#}
+{#{% endblock %}#}
