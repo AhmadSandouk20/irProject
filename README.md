@@ -59,4 +59,11 @@ html, javascript, jquery, ajax
 jinja
 
 
-# How To Use
+# how to search
+1) enter text in the textbox
+
+2) press enter
+
+3) if you mistaked writing presss on the text that appears down the textbox it contains the wright words
+
+4) press enter again to get your search result
